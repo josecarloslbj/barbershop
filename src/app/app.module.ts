@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { MaterializeModule } from 'angular2-materialize';
 import { HomeComponent } from './home/home.component';
 import { ContatoComponent } from './contato/contato.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ContatoComponent
+    ContatoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
