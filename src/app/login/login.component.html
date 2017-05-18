@@ -1,3 +1,127 @@
-<p>
-  login works!
-</p>
+<div class="row" *ngIf="!mostrarFormCadastro">
+  <h5>
+    <i class="material-icons left">cloud</i> Identificação
+  </h5>
+  <form class="col s12 m6" #FormCadastrar="ngForm" (ngSubmit)="submitformLoginCadastrar(FormCadastrar)">
+    <div class="row">
+      <h5>Quero criar uma conta</h5>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" type="email" class="validate" email [ngModel]="usuario.email" name="emailCadastrar">
+        <label for="email" [ngClass]="usuario.email ? 'active' : ''">Email</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Cadastrar
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+  </form>
+  <form class="col s12 m6" #formLogin="ngForm" (ngSubmit)="submitformLogin(formLogin)">
+    <div class="row">
+      <h5>Já sou cliente</h5>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" type="email" class="validate">
+        <label for="email">Email</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="password" type="password" class="validate">
+        <label for="password">Password</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Entrar
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="row">
+    <div class="col s12">
+      <div class="SocialLoginBox" data-reactid=".0.1.0.$main.2.0">
+        <span data-reactid=".0.1.0.$main.2.0.0">Agilize seu acesso e utilize sua rede social para se conectar ao nosso sistema*</span>
+        <span data-reactid=".0.1.0.$main.2.0.1">
+        <svg class="SocialLoginBox-button--FB" data-ga="{&quot;category&quot;:&quot;Login&quot;,&quot;action&quot;:&quot;Rede Social&quot;,&quot;label&quot;:&quot;Facebook&quot;}" width="16.281" height="16.275" viewBox="0 0 595.281 595.275" data-reactid=".0.1.0.$main.2.0.1.0">
+          <path d="M562.426-.003H32.856C14.705-.003 0 14.705 0 32.852v529.573c0 18.142 14.707 32.853 32.855 32.853H317.96v-230.52h-77.576v-89.842h77.575v-66.254c0-76.888 46.954-118.755 115.548-118.755 32.853 0 61.092 2.447 69.32 3.54V173.8l-47.574.022c-37.3 0-44.52 17.725-44.52 43.735v57.36h88.962l-11.585 89.84h-77.377v230.52h151.692c18.14 0 32.854-14.71 32.854-32.852V32.852c0-18.148-14.715-32.855-32.854-32.855z" data-reactid=".0.1.0.$main.2.0.1.0.0"></path></svg></span>
+        <span data-ga="{&quot;category&quot;:&quot;Login&quot;,&quot;action&quot;:&quot;Rede Social&quot;,&quot;label&quot;:&quot;Google+&quot;}"
+          data-reactid=".0.1.0.$main.2.0.2">
+          <svg class="SocialLoginBox-button--GPlus" width="16.281" height="16.279" viewBox="0 0 595.281 595.279" data-reactid=".0.1.0.$main.2.0.2.0">
+            <path d="M560.283 0H35C15.67 0 0 15.67 0 35v525.28c-.002 19.33 15.668 35 34.998 35H560.28c19.33 0 35-15.67 35-35V35c.003-19.33-15.667-35-34.997-35zM216.65 439.372c-78.36 0-141.732-63.373-141.732-141.732 0-78.36 63.372-141.732 141.732-141.732 38.27 0 70.264 13.97 94.96 37.055l-38.468 37.055c-10.53-10.124-28.958-21.87-56.492-21.87-48.394 0-87.87 40.09-87.87 89.493 0 49.394 39.476 89.493 87.87 89.493 56.086 0 77.145-40.297 80.388-61.138H216.65v-48.602h133.833c1.216 7.09 2.234 14.177 2.234 23.49 0 80.99-54.266 138.49-136.067 138.49zm303.713-121.485h-40.495v40.494h-40.495v-40.493h-40.495V277.39h40.495v-40.494h40.495v40.495h40.495v40.497z"
+              data-reactid=".0.1.0.$main.2.0.2.0.0">
+            </path>
+          </svg>
+          </span>
+      </div>
+    </div>
+    <div class="col s12">
+      <p class="light">
+        *Seus dados serão preservados e nada será publicado em sua timeline. serviço válido somente para pessoas fisicas. Em caso
+        de dúvidas, acesse nossa central de atendimento.
+      </p>
+    </div>
+  </div>
+
+</div>
+<!--Fim <div class="row" *ngIf="!mostrarFormCadastro">-->
+
+
+
+<!--Form de cadastro-->
+<div class="row" *ngIf="mostrarFormCadastro">
+  <form class="col s12" #formCadastro="ngForm">
+    <div class="row">
+      <h5>Criar uma conta</h5>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" type="email" class="validate" email [ngModel]="usuario.email" name="email_CadastrarConta">
+        <label for="email" [ngClass]="usuario.email ? 'active' : ''" >Email</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="nome" type="text" class="validate" [ngModel]="usuario.nome" name="nome_CadastrarConta">
+        <label for="nome" [ngClass]="usuario.nome ? 'active' : ''"  >Nome</label>
+      </div>
+      <div class="input-field col s12 m6">
+        <input id="senha" type="password" class="validate" [ngModel]="usuario.senha" name="senha_CadastrarConta">
+        <label for="senha">Senha</label>
+      </div>
+      <div class="input-field col s12   m6">
+        <input id="contraSenha" type="password" class="validate">
+        <label for="contraSenha">Confirmar Senha</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <button class="btn waves-effect waves-light" type="submit" name="action" (click)="Cadastrar(formCadastro);">Cadastrar
+          <i class="material-icons right">send</i>
+        </button>
+        <button class="btn waves-effect waves-light" type="submit" name="action" (click)="VoltarCadastro();">Voltar
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h5> <span [innerHTML]="modal.icon"></span> {{modal.title}}</h5>
+    <p>{{modal.mensagem}}</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">{{modal.fechar}}</a>
+  </div>
+</div>
