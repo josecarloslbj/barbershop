@@ -1,5 +1,8 @@
+
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
+import { LoginService } from './login.service';
+import { Cliente } from './../models/cliente';
 
 //import { Materialize } from 'angular2-materialize';
 
@@ -13,6 +16,10 @@ declare var Materialize: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+ public clientes: Cliente[] = [];
+ public currentCliente: Cliente;
+
   private mostrarFormCadastro: boolean;
   usuario: any = {
     email: '',
@@ -30,7 +37,9 @@ export class LoginComponent implements OnInit {
     nao: 'Não'
   }
 
-  constructor() {
+  constructor(private service: LoginService) {
+     this.currentCliente = new Cliente();
+
     this.mostrarFormCadastro = false;
 
     $(document).ready(function () {
@@ -64,7 +73,25 @@ export class LoginComponent implements OnInit {
     this.mostrarFormCadastro = false;
     this.usuario= new this.usuario();
   }
+
+   private loadTodos(): void {
+   
+
+        this.clientes = [];
+        // this.service.list()
+        //     .subscribe((res) => {
+        //         if (res) {
+        //             this.clientes = res
+        //         } else {
+        //             console.error('Deu erro');
+        //         }
+        //     });
+    }
+
+
   ngOnInit() {
+
+    this.loadTodos();
   }
 
 }
