@@ -18,7 +18,7 @@ declare var Materialize: any;
 export class LoginComponent implements OnInit {
 
  public clientes: Cliente[] = [];
- public currentCliente: Cliente;
+
 
   private mostrarFormCadastro: boolean;
   usuario: any = {
@@ -38,7 +38,8 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(private service: LoginService) {
-     this.currentCliente = new Cliente();
+   
+
 
     this.mostrarFormCadastro = false;
 
@@ -54,6 +55,7 @@ export class LoginComponent implements OnInit {
   }
 
   submitformLoginCadastrar(form) {
+   console.log(this.clientes);
 
     this.usuario.email = form.value.emailCadastrar;
     if (this.usuario.email == null || this.usuario.email == '') {
@@ -74,24 +76,27 @@ export class LoginComponent implements OnInit {
     this.usuario= new this.usuario();
   }
 
-   private loadTodos(): void {
-   
+   private loadTodos(): void { 
+      this.clientes=[];
 
-        this.clientes = [];
-        // this.service.list()
-        //     .subscribe((res) => {
-        //         if (res) {
-        //             this.clientes = res
-        //         } else {
-        //             console.error('Deu erro');
-        //         }
-        //     });
+        this.service.list()
+            .subscribe((res) => {
+                if (res) {
+                    this.clientes = res;                   
+                } else {
+                    console.error('Deu erro');
+                }
+            });
+
+         
     }
 
 
   ngOnInit() {
 
     this.loadTodos();
+
+
   }
 
 }
