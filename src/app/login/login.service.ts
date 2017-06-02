@@ -11,13 +11,14 @@ export class LoginService {
     private baseUrl: string = "http://localhost:50352/api/cliente";
 
     constructor(private http: Http) {
+        
     }
 
-    // public getById(id: number): Observable<Cliente> {
+    public getById(id: number): Observable<Cliente> {
 
-    //     return this.http.get(this.baseUrl + '/' + id)
-    //         .map(res => res.json());
-    // }
+        return this.http.get(this.baseUrl + '/' + id)
+            .map(res => res.json());
+    }
 
     public list(): Observable<Cliente[]> {
 
@@ -25,6 +26,25 @@ export class LoginService {
             .map(res => res.json());
     }
 
-  
+    public post(todo: Cliente): Observable<Cliente> {
+        let headers = new Headers();
 
+        headers.append('Content-Type', 'application/json');
+
+        return this.http.post(this.baseUrl, JSON.stringify(todo), { headers: headers })
+            .map(res => res.json());
+    }
+    public put(id: number, todo: Cliente): Observable<Cliente> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.put(this.baseUrl + '/' + id, JSON.stringify(todo), { headers: headers })
+            .map(res => res.json());
+
+    }
+
+    public delete(id: number): Observable<Cliente> {
+
+        return this.http.delete(this.baseUrl + '/' + id)
+            .map(res => res.json());
+    }
 }

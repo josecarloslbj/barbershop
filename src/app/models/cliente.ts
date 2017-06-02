@@ -1,5 +1,6 @@
 export class Cliente{
-    public Nome:string;
-    public Email:string;
-    public Senha:string;
+    public id:number;
+    public nome:string;
+    public email:string;
+    public senha:string;
 }
