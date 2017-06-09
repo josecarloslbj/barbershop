@@ -1,8 +1,7 @@
-
 import { Component, OnInit } from '@angular/core';
 // import { FormsModule } from '@angular/forms';
 import { LoginService } from './login.service';
-import { Cliente } from './../models/cliente';
+import { Usuario } from './../models/usuario';
 
 //import { Materialize } from 'angular2-materialize';
 
@@ -17,17 +16,11 @@ declare var Materialize: any;
 })
 export class LoginComponent implements OnInit {
 
-    public clientes: Cliente[] = [];
-    public inEditMode: boolean = false;
-    public currentCliente: Cliente;
-
+    private usuario: Usuario = new Usuario();
+    private currentCliente: Usuario;
     private mostrarFormCadastro: boolean;
-    usuario: any = {
-        email: '',
-        nome: '',
-        senha: ''
-    }
-
+    private inEditMode: boolean = false;
+    private retorno: boolean;
 
     modal: any = {
         icon: '<i class="small material-icons">info_outline</i>',
@@ -38,11 +31,15 @@ export class LoginComponent implements OnInit {
         nao: 'Não'
     }
 
+    efetuarLogin: any = {
+        email: '',
+        senha: ''
+    }
+
     constructor(private service: LoginService) {
 
-
-
         this.mostrarFormCadastro = false;
+
 
         $(document).ready(function () {
             Materialize.updateTextFields();
@@ -56,7 +53,7 @@ export class LoginComponent implements OnInit {
     }
 
     submitformLoginCadastrar(form) {
-        console.log(this.clientes);
+        console.log(this.usuario);
 
         this.usuario.email = form.value.emailCadastrar;
         if (this.usuario.email == null || this.usuario.email == '') {
@@ -65,18 +62,18 @@ export class LoginComponent implements OnInit {
         }
         else {
             this.mostrarFormCadastro = true;
-            this.currentCliente = new Cliente();
+            this.currentCliente = new Usuario();
 
             this.currentCliente.email = form.value.emailCadastrar;
             this.currentCliente.nome = 'Teste Novo';
             this.currentCliente.senha = '123anc';
 
 
-   this.currentCliente.id = 1;
-        this.setOrUnsetCompleted(this.currentCliente);
-        this.remove(2);
+            this.currentCliente.id = 1;
+            this.setOrUnsetCompleted(this.currentCliente);
+            this.remove(2);
 
-        
+
             this.saveNewTodo();
         }
     }
@@ -88,31 +85,38 @@ export class LoginComponent implements OnInit {
     }
     VoltarCadastro() {
         this.mostrarFormCadastro = false;
-        this.usuario = new this.usuario();
+        this.usuario = new Usuario();
 
         this.currentCliente.id = 1;
         this.setOrUnsetCompleted(this.currentCliente);
         this.remove(2);
     }
 
+    efetuarlogin_click() {
+        this.retorno = this.validarLoginUsuario();
+
+        alert(this.retorno);
+
+    }
+
     public remove(id: number): void {
         this.service.delete(id)
             .subscribe((res) => {
                 if (res) {
-                    this.loadTodos();
+                    //this.loadTodos();
                 } else {
                     console.error(res);
                 }
             });
     }
 
-    public edit(cliente: Cliente): void {
+    public edit(cliente: Usuario): void {
         this.currentCliente = cliente;
         // this.inEditMode = true;
         // this.buttonLabel = 'Salvar';
     }
 
-    public setOrUnsetCompleted(cliente: Cliente): void {
+    public setOrUnsetCompleted(cliente: Usuario): void {
 
         this.service.put(cliente.id, cliente)
             .subscribe((res) => {
@@ -122,19 +126,36 @@ export class LoginComponent implements OnInit {
             });
     }
 
-    private loadTodos(): void {
-        this.clientes = [];
-        this.service.list()
+    private validarLoginUsuario(): boolean {
+       
+        this.service.validarLogin(this.efetuarLogin.email, this.efetuarLogin.senha)
             .subscribe((res) => {
                 if (res) {
-                    this.clientes = res;
+                    this.retorno = true; 
                 } else {
+                       this.retorno = false;
                     console.error('Deu erro');
                 }
             });
+    alert(this.retorno);
+        return    true;
     }
+
+    // private loadTodos(): void {
+    //     this.usuario =new Usuario();
+    //     this.service.list()
+    //         .subscribe((res) => {
+    //             if (res) {
+    //             if (res) {
+    //                 this.usuario = res;
+    //             } else {
+    //                 console.error('Deu erro');
+    //             }
+    //         });
+    // }
+
     public cancel(): void {
-        this.currentCliente = new Cliente();
+        this.currentCliente = new Usuario();
         // this.inEditMode = false;
     }
 
@@ -151,8 +172,8 @@ export class LoginComponent implements OnInit {
         this.service.post(this.currentCliente)
             .subscribe((res) => {
                 if (res) {
-                    this.clientes.push(res);
-                    this.currentCliente = new Cliente();
+                    // this.usuario.push(res);
+                    this.currentCliente = new Usuario();
                     this.inEditMode = false;
                     console.log(res.nome);
                     this.usuario.nome = res.nome;
@@ -170,7 +191,7 @@ export class LoginComponent implements OnInit {
         this.service.put(this.currentCliente.id, this.currentCliente)
             .subscribe((res) => {
                 if (res) {
-                    this.currentCliente = new Cliente();
+                    this.currentCliente = new Usuario();
                     this.inEditMode = false;
                     // this.buttonLabel = 'Criar';
                 } else {
@@ -181,10 +202,7 @@ export class LoginComponent implements OnInit {
 
 
     ngOnInit() {
-
-        this.loadTodos();
-
-
+        //  this.loadTodos();
     }
 
 }
