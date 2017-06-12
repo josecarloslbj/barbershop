@@ -1,4 +1,5 @@
 
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,9 +15,11 @@ import { LoginService } from './login/login.service';
 import { AppRoutingModule } from './app.routing.module';
 import { CursosModule } from './cursos/cursos.module';
 import { AlunosModule } from './alunos/alunos.module';
+// import { UsuarioComponent } from './usuario/usuario.component';
 // import { AlunosComponent } from './alunos/alunos.component';
 //import { CursosRountingModule } from './cursos/cursos.routing.module';
-
+import { UsuarioModule } from './usuario/usuario.module';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { AlunosModule } from './alunos/alunos.module';
     HomeComponent,
     ContatoComponent,
     LoginComponent,
+    //UsuarioComponent,
     //CursosComponent,
     //AlunosComponent
   ],
@@ -34,9 +38,10 @@ import { AlunosModule } from './alunos/alunos.module';
     MaterializeModule,
     AppRoutingModule,
     CursosModule,
-    AlunosModule 
+    AlunosModule,
+    UsuarioModule 
   ],
-  providers: [LoginService],
+  providers: [LoginService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

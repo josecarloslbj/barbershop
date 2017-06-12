@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private currentCliente: Usuario;
     private mostrarFormCadastro: boolean;
     private inEditMode: boolean = false;
-    private retorno: boolean;
+    public retorno: boolean;
 
     modal: any = {
         icon: '<i class="small material-icons">info_outline</i>',
@@ -93,10 +93,7 @@ export class LoginComponent implements OnInit {
     }
 
     efetuarlogin_click() {
-        this.retorno = this.validarLoginUsuario();
-
-        alert(this.retorno);
-
+        this.validarLoginUsuario();
     }
 
     public remove(id: number): void {
@@ -126,19 +123,30 @@ export class LoginComponent implements OnInit {
             });
     }
 
-    private validarLoginUsuario(): boolean {
+    private validarLoginUsuario() {
+
+
+        this.service.validarLogin(this.efetuarLogin.email, this.efetuarLogin.senha);
        
-        this.service.validarLogin(this.efetuarLogin.email, this.efetuarLogin.senha)
-            .subscribe((res) => {
-                if (res) {
-                    this.retorno = true; 
-                } else {
-                       this.retorno = false;
-                    console.error('Deu erro');
-                }
-            });
-    alert(this.retorno);
-        return    true;
+
+
+        // this.service.validarLogin(this.efetuarLogin.email, this.efetuarLogin.senha)
+        //     .subscribe((res) => {
+        //         if (res) {
+        //             this.retorno = true;
+
+        //             this.service.userLogado = true;
+
+        //               console.log('  this.service.userLogado ' + this.service.userLogado);
+        //         } else {
+        //             this.retorno = false;
+        //             this.service.userLogado = false;
+        //             console.error('Deu erro');
+        //         }
+        //     });
+
+
+        // return true;
     }
 
     // private loadTodos(): void {

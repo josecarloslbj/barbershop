@@ -10,17 +10,46 @@ import { Observable } from 'rxjs/Observable';
 export class LoginService {
     private baseUrl: string = "http://localhost:50352/api/Cliente";
 
-    constructor(private http: Http) {
-        
+    private usuarioAutenticado: boolean = false;
+
+    constructor(private http: Http) { }
+
+
+    public usuarioEstaAutenticado(): boolean {
+        return this.usuarioAutenticado;
     }
 
-  public validarLogin(email: string, senha: string): Observable<Usuario> {   
 
-   
-      return this.http.get(this.baseUrl + '/validarLogin?senha='+senha+'&login='+email)
-            .map(res => res.json());
+    public validarLogin(email: string, senha: string) {
+
+        if (email === 'josecarloslbj@gmail.com' && senha === '123456')
+            return true;
+        else
+            return false;
+            
+        // var retorno = this.http.get(this.baseUrl + '/validarLogin?senha=' + senha + '&login=' + email)
+        //     .map(res => res.json());
+
+        // retorno.subscribe((res) => {
+        //     if (res) {
+        //         this.usuarioAutenticado = true;                               
+        //         return this.usuarioAutenticado;
+        //     }else
+        //     {
+        //        this.usuarioAutenticado = false;   
+        //         return this.usuarioAutenticado;
+        //     }
+        // });
 
     }
+
+
+    // public validarLogin(email: string, senha: string): Observable<Usuario> {
+
+    //     return this.http.get(this.baseUrl + '/validarLogin?senha=' + senha + '&login=' + email)
+    //         .map(res => res.json());
+
+    // }
 
     public getById(id: number): Observable<Usuario> {
 
