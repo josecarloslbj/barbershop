@@ -6,8 +6,8 @@ import { AuthGuard } from './../guards/auth.guard';
 
 const USUARIO_ROUTES: Routes = [
     {
-        path: 'usuario', component: UsuarioComponent,
-        canActivate:[AuthGuard]
+        path: 'usuario', component: UsuarioComponent
+        ,canActivate:[AuthGuard]
         
     },
 ];

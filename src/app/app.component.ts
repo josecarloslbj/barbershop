@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
 
+import { Component, OnInit } from '@angular/core';
+
+import { LoginService } from './login/login.service';
+import { AuthService } from './login/auth.service';
 
 declare var $: any;
 
@@ -8,13 +11,21 @@ declare var $: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app works!';
 
-  constructor() {
+  mostrarMenu: boolean = false;
+
+  constructor(private authService: AuthService) {
 
     $(document).ready(function () {
       $(".button-collapse").sideNav();
     })
+  }
+
+  ngOnInit() {
+    this.authService.mostrarMenuEmitter.subscribe(
+      q => this.mostrarMenu = q
+    );
   }
 }

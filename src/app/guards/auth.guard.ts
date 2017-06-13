@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { LoginService } from './../login/login.service';
+import { AuthService } from './../login/auth.service';
 import { Router, RouterModule } from '@angular/router';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
 
 
   constructor(
-    private loginService: LoginService,
+    private loginService: AuthService,
     private router: Router
   ) {
 
@@ -24,13 +24,11 @@ export class AuthGuard implements CanActivate {
     console.log('auth.guard chamada usuarioEstaAutenticado')
 
     if (this.loginService.usuarioEstaAutenticado()) {
-      console.log('auth.guard chamada usuarioEstaAutenticado retorno true')
+     
       return true;
     }
 
     this.router.navigate(['/login']);
-
-    console.log('auth.guard chamada usuarioEstaAutenticado retorno false')
     return false;
   }
 }

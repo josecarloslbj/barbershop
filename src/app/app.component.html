@@ -1,5 +1,5 @@
 
-<nav>
+<nav *ngIf="mostrarMenu" >
     <div class="nav-wrapper">
       <a href="#!" class="brand-logo">Logo</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -8,13 +8,14 @@
          <li routerLinkActive="active"><a routerLink="/cursos" >Cursos</a></li>
          <li routerLinkActive="active"><a routerLink="/alunos" >Alunos</a></li>
          <li routerLinkActive="active"><a routerLink="/login">login</a></li>
-       
+         <li routerLinkActive="active"><a routerLink="/usuario">usuário</a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
          <li routerLinkActive="active"><a routerLink="/contato" >Contato</a></li>
          <li routerLinkActive="active"><a routerLink="/cursos" >Cursos</a></li>
          <li routerLinkActive="active"><a routerLink="/alunos" >Alunos</a></li>
          <li routerLinkActive="active"><a routerLink="/login">login</a></li>
+         <li routerLinkActive="active"><a routerLink="/usuario">usuário</a></li>
       </ul>
     </div>
   </nav>

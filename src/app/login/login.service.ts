@@ -1,9 +1,11 @@
 
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Headers } from '@angular/Http';
-import { Usuario } from './../models/Usuario';
+
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+import { Usuario } from './../models/Usuario';
+
 
 @Injectable()
 
@@ -11,6 +13,8 @@ export class LoginService {
     private baseUrl: string = "http://localhost:50352/api/Cliente";
 
     private usuarioAutenticado: boolean = false;
+
+    mostrarMenuEmitter = new EventEmitter<boolean>();
 
     constructor(private http: Http) { }
 
@@ -22,11 +26,16 @@ export class LoginService {
 
     public validarLogin(email: string, senha: string) {
 
-        if (email === 'josecarloslbj@gmail.com' && senha === '123456')
-            return true;
-        else
-            return false;
-            
+        if (email === 'josecarloslbj@gmail.com' && senha === '123456') {
+            this.usuarioAutenticado = true;
+            this.mostrarMenuEmitter.emit(true);
+        } else {
+            this.usuarioAutenticado = false;
+
+            this.mostrarMenuEmitter.emit(false);
+        }
+
+        console.log(' this.usuarioAutenticado '+ this.usuarioAutenticado);
         // var retorno = this.http.get(this.baseUrl + '/validarLogin?senha=' + senha + '&login=' + email)
         //     .map(res => res.json());
 

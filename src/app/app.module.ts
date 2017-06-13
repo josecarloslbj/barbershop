@@ -10,26 +10,23 @@ import { MaterializeModule } from 'angular2-materialize';
 import { HomeComponent } from './home/home.component';
 import { ContatoComponent } from './contato/contato.component';
 import { LoginComponent } from './login/login.component';
-import { LoginService } from './login/login.service';
-// import { CursosComponent } from './cursos/cursos.component';
+
+
 import { AppRoutingModule } from './app.routing.module';
 import { CursosModule } from './cursos/cursos.module';
 import { AlunosModule } from './alunos/alunos.module';
-// import { UsuarioComponent } from './usuario/usuario.component';
-// import { AlunosComponent } from './alunos/alunos.component';
-//import { CursosRountingModule } from './cursos/cursos.routing.module';
+
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './login/auth.service';
+import { LoginService } from './login/login.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ContatoComponent,
-    LoginComponent,
-    //UsuarioComponent,
-    //CursosComponent,
-    //AlunosComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +38,7 @@ import { AuthGuard } from './guards/auth.guard';
     AlunosModule,
     UsuarioModule 
   ],
-  providers: [LoginService,AuthGuard],
+  providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
